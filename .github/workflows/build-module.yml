@@ -49,7 +49,7 @@ jobs:
       - name: Get snapshot commit SHA and device ARCH
         if: env.FILE_EXISTS == 'false'
         run: |
-          PROFILE_URL="https://downloads.immortalwrt.org/snapshots/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/profiles.json"
+          PROFILE_URL="https://downloads.immortalwrt.org/releases/23.05.4/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/profiles.json"
           SNAPSHOT_COMMIT_SHA=$(wget -q $PROFILE_URL -O- | tr ',' '\n' | grep "version_code"| awk -F: '{print $2}' | tr -d '"' | awk -F- '{print $2}')
           echo "Snapshot commit sha: $SNAPSHOT_COMMIT_SHA"
           echo "SNAPSHOT_COMMIT_SHA=$SNAPSHOT_COMMIT_SHA" >> $GITHUB_ENV
